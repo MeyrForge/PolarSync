@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "738980944891",
+    "project_id": "polarsync-a7700",
+    "storage_bucket": "polarsync-a7700.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738980944891:android:45222c256bc4d6d727c95e",
+        "android_client_info": {
+          "package_name": "com.meyrforge.polarsync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzRcn6pRZo6-YONstwfTD-Fi92BIPKyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
