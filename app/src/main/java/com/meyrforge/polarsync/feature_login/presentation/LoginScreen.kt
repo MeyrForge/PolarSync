@@ -1,4 +1,4 @@
-package com.meyrforge.polarsync.feature_login.presentation.components
+package com.meyrforge.polarsync.feature_login.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -15,6 +15,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meyrforge.polarsync.R
+import com.meyrforge.polarsync.feature_login.presentation.components.ButtonComponent
+import com.meyrforge.polarsync.feature_login.presentation.components.InputFieldComponent
 import com.meyrforge.polarsync.ui.theme.DeepPurple
 
 @Preview
