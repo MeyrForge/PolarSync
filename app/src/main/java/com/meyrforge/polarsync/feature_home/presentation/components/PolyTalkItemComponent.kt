@@ -17,10 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meyrforge.polarsync.R
-import com.meyrforge.polarsync.ui.theme.DeepPurple
 import com.meyrforge.polarsync.ui.theme.LightWarmGray
 import com.meyrforge.polarsync.ui.theme.PowderedPink
-import com.meyrforge.polarsync.ui.theme.SoftBlueLavander
 
 @Preview(showBackground = true, backgroundColor = 0xFF27252C)
 @Composable
@@ -31,7 +29,7 @@ fun PolyTalkItem() {
             .fillMaxWidth()
             .height(120.dp)
             .clip(RoundedCornerShape(10.dp))
-            .background(PowderedPink),
+            .background(PowderedPink.copy(alpha = 0.4f)),
         contentAlignment = Alignment.Center
     ) {
         Box(
