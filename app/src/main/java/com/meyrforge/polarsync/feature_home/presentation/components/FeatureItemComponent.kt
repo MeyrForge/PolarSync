@@ -1,7 +1,7 @@
 package com.meyrforge.polarsync.feature_home.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +26,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.meyrforge.polarsync.ui.theme.DeepPurple
-import com.meyrforge.polarsync.ui.theme.PowderedPink
 import com.meyrforge.polarsync.ui.theme.pink
 
 @Composable
-fun FeatureItemComponent(icon: ImageVector, title: String, color: Color) {
+fun FeatureItemComponent(icon: ImageVector, title: String, color: Color, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,7 +37,8 @@ fun FeatureItemComponent(icon: ImageVector, title: String, color: Color) {
             .clip(RoundedCornerShape(10.dp))
             .background(color.copy(alpha = 0.2f))
             //.border(2.dp, color, RoundedCornerShape(10.dp))
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable { onClick() },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -68,10 +67,10 @@ fun FeatureItemComponent(icon: ImageVector, title: String, color: Color) {
 fun ItemPreview() {
     Row(modifier = Modifier.fillMaxWidth()) {
         Box(modifier = Modifier.weight(5f)) {
-            FeatureItemComponent(Icons.Outlined.Mood, "Estados de ánimo", pink)
+            FeatureItemComponent(Icons.Outlined.Mood, "Estados de ánimo", pink) {}
         }
         Box(modifier = Modifier.weight(5f)) {
-            FeatureItemComponent(Icons.Outlined.Medication, "Medicación", pink)
+            FeatureItemComponent(Icons.Outlined.Medication, "Medicación", pink) {}
         }
     }
 }

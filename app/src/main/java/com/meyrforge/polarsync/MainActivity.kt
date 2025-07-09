@@ -7,8 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.meyrforge.polarsync.feature_home.presentation.components.HomeScreen
+import com.meyrforge.polarsync.feature_home.presentation.HomeScreen
 import com.meyrforge.polarsync.feature_login.presentation.LoginScreen
+import com.meyrforge.polarsync.feature_moods.presentation.MoodSelectionScreen
 import com.meyrforge.polarsync.feature_register.presentation.ActivationEmailScreen
 import com.meyrforge.polarsync.feature_register.presentation.RegisterScreen
 import com.meyrforge.polarsync.ui.theme.PolarSyncTheme
@@ -30,13 +31,16 @@ class MainActivity : ComponentActivity() {
                         LoginScreen(navController)
                     }
                     composable(route = Screen.HomeScreen.route) {
-                        HomeScreen()
+                        HomeScreen(navController)
                     }
                     composable(route = Screen.RegisterScreen.route) {
                         RegisterScreen(navController)
                     }
                     composable(route = Screen.ActivationEmailScreen.route) {
                         ActivationEmailScreen(navController)
+                    }
+                    composable(route = Screen.MoodSelectionScreen.route) {
+                        MoodSelectionScreen()
                     }
                 }
             }

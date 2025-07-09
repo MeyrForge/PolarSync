@@ -1,4 +1,4 @@
-package com.meyrforge.polarsync.feature_home.presentation.components
+package com.meyrforge.polarsync.feature_home.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +16,12 @@ import androidx.compose.material.icons.outlined.Nightlight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.meyrforge.polarsync.Screen
+import com.meyrforge.polarsync.feature_home.presentation.components.FeatureItemComponent
+import com.meyrforge.polarsync.feature_home.presentation.components.PolyTalkItem
 import com.meyrforge.polarsync.ui.shared.TopSemicircleItem
 import com.meyrforge.polarsync.ui.theme.DeepPurple
 import com.meyrforge.polarsync.ui.theme.PowderedPink
@@ -27,9 +30,8 @@ import com.meyrforge.polarsync.ui.theme.orange
 import com.meyrforge.polarsync.ui.theme.pink
 import com.meyrforge.polarsync.ui.theme.purple
 
-@Preview(showBackground = true)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,10 +57,14 @@ fun HomeScreen() {
                 )
             }
             item {}
-            item { FeatureItemComponent(Icons.Outlined.Mood, "Estados de ánimo", orange) }
-            item { FeatureItemComponent(Icons.Outlined.Medication, "Medicación", green) }
-            item { FeatureItemComponent(Icons.Outlined.Nightlight, "Sueño", purple) }
-            item { FeatureItemComponent(Icons.Outlined.AssignmentInd, "Terapia", pink) }
+            item {
+                FeatureItemComponent(Icons.Outlined.Mood, "Estados de ánimo", orange) {
+                    navController.navigate(Screen.MoodSelectionScreen.route)
+                }
+            }
+            item { FeatureItemComponent(Icons.Outlined.Medication, "Medicación", green) {} }
+            item { FeatureItemComponent(Icons.Outlined.Nightlight, "Sueño", purple) {} }
+            item { FeatureItemComponent(Icons.Outlined.AssignmentInd, "Terapia", pink) {} }
         }
     }
 }
