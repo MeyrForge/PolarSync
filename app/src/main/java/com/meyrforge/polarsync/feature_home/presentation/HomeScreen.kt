@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.meyrforge.polarsync.Screen
 import com.meyrforge.polarsync.feature_home.presentation.components.FeatureItemComponent
-import com.meyrforge.polarsync.feature_home.presentation.components.PolyTalkItem
+import com.meyrforge.polarsync.ui.shared.PolyTalkItem
 import com.meyrforge.polarsync.ui.shared.TopSemicircleItem
 import com.meyrforge.polarsync.ui.theme.DeepPurple
 import com.meyrforge.polarsync.ui.theme.PowderedPink

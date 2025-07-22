@@ -1,4 +1,4 @@
-package com.meyrforge.polarsync.feature_home.presentation.components
+package com.meyrforge.polarsync.ui.shared
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
