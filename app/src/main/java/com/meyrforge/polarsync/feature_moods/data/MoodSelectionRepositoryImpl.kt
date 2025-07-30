@@ -1,6 +1,5 @@
 package com.meyrforge.polarsync.feature_moods.data
 
-import com.meyrforge.polarsync.feature_moods.data.entities.MoodEntity
 import com.meyrforge.polarsync.feature_moods.data.entities.toMoodEntity
 import com.meyrforge.polarsync.feature_moods.data.entities.toMoodSelection
 import com.meyrforge.polarsync.feature_moods.domain.MoodSelectionRepository
@@ -13,8 +12,13 @@ class MoodSelectionRepositoryImpl @Inject constructor(private val moodDao: MoodD
         return moodDao.insertMood(moodSelection.toMoodEntity())
     }
 
-    override suspend fun getMoodsByDate(date: String): MoodSelection? {
-        return moodDao.searchByDate(date)?.last()?.toMoodSelection()
+    override suspend fun getMoodsByDate(date: String): MoodSelection {
+        val moods = moodDao.searchByDate(date)
+        return if(moods.isNullOrEmpty()){
+            MoodSelection()
+        }else{
+            moods.last().toMoodSelection()
+        }
     }
 
 }

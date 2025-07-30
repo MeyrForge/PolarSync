@@ -1,5 +1,8 @@
 package com.meyrforge.polarsync.feature_moods.presentation
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,17 +19,20 @@ class MoodSelectionViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private val _highestMoodChosen = MutableLiveData("")
-    var highestMoodChosen: MutableLiveData<String> = _highestMoodChosen
+    private val _highestMoodChosen = mutableStateOf("")
+    var highestMoodChosen: State<String> = _highestMoodChosen
 
-    private val _irritableMoodChosen = MutableLiveData("")
-    var irritableMoodChosen: MutableLiveData<String> = _irritableMoodChosen
+    private val _irritableMoodChosen = mutableStateOf("")
+    var irritableMoodChosen: State<String> = _irritableMoodChosen
 
-    private val _anxiousMoodChosen = MutableLiveData("")
-    var anxiousMoodChosen: MutableLiveData<String> = _anxiousMoodChosen
+    private val _anxiousMoodChosen = mutableStateOf("")
+    var anxiousMoodChosen: State<String> = _anxiousMoodChosen
 
-    private val _depressedMoodChosen = MutableLiveData("")
-    var depressedMoodChosen: MutableLiveData<String> = _depressedMoodChosen
+    private val _depressedMoodChosen = mutableStateOf("")
+    var depressedMoodChosen: State<String> = _depressedMoodChosen
+
+    private val _notificationMessage = MutableLiveData<String?>(null)
+    val notificationMessage: LiveData<String?> = _notificationMessage
 
     fun onHighestMoodChosen(level: String) {
         _highestMoodChosen.value = level
@@ -50,12 +56,17 @@ class MoodSelectionViewModel @Inject constructor(
 
     fun onSaveMoods() {
         viewModelScope.launch {
-            saveMoodSelectionUseCase(
-                _highestMoodChosen.value!!,
-                _irritableMoodChosen.value!!,
-                _anxiousMoodChosen.value!!,
-                _depressedMoodChosen.value!!
+            val areSaved = saveMoodSelectionUseCase(
+                _highestMoodChosen.value,
+                _irritableMoodChosen.value,
+                _anxiousMoodChosen.value,
+                _depressedMoodChosen.value
             )
+            if (areSaved != null){
+                _notificationMessage.value = "Guardado con éxito"
+            }else{
+                _notificationMessage.value = "Error al guardar"
+            }
         }
     }
 
@@ -67,5 +78,9 @@ class MoodSelectionViewModel @Inject constructor(
             _anxiousMoodChosen.value = moods.anxious
             _depressedMoodChosen.value = moods.depressed
         }
+    }
+
+    fun clearMessage(){
+        _notificationMessage.value = null
     }
 }

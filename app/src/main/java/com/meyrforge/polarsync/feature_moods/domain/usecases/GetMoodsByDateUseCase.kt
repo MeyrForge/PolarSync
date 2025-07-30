@@ -11,16 +11,7 @@ class GetMoodsByDateUseCase @Inject constructor(private val moodSelectionReposit
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        return moodSelectionRepository.getMoodsByDate("$day/$month/$year") ?: MoodSelection(
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "")
+        return moodSelectionRepository.getMoodsByDate("$day/$month/$year") ?: MoodSelection()
     }
 
 }

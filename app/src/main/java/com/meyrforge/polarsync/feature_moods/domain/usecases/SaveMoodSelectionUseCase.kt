@@ -12,7 +12,7 @@ class SaveMoodSelectionUseCase @Inject constructor(private val moodSelectionRepo
         irritable: String,
         anxious: String,
         depressed: String,
-    ) {
+    ): Long? {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -31,7 +31,7 @@ class SaveMoodSelectionUseCase @Inject constructor(private val moodSelectionRepo
                 "",
                 ""
             )
-        moodSelectionRepository.saveMoods(moodSelection)
+        return moodSelectionRepository.saveMoods(moodSelection)
     }
 
 }
