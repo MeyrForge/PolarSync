@@ -54,7 +54,7 @@ fun MoodSelectionComponent(selectedMood: String, color: Color, title: String, on
             Icon(
                 Icons.AutoMirrored.Outlined.NoteAdd,
                 contentDescription = "Add notes",
-                tint = color,
+                tint = color.copy(alpha = 0.0f),
                 modifier = Modifier.size(30.dp)
             )
         }
@@ -133,7 +133,7 @@ fun MoodItemComponent(alpha: Float, color: Color, text: String, chosen: Boolean)
         Text(
             text,
             color = color,
-            fontSize = 12.sp,
+            fontSize = 10.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.fillMaxWidth()

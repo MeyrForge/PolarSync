@@ -11,9 +11,15 @@ import androidx.compose.material3.TimePickerColors
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,13 +32,16 @@ import com.meyrforge.polarsync.ui.theme.SoftBlueLavander
 @Preview
 @Composable
 fun WentToSleepClockComponent() {
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            "A que hora te fuiste a dormir?",
+            "A qué hora te fuiste a dormir?",
             fontSize = 18.sp,
             color = PowderedPink,
             modifier = Modifier
@@ -46,8 +55,12 @@ fun WentToSleepClockComponent() {
                 timeSelectorSelectedContentColor = DeepPurple,
                 timeSelectorSelectedContainerColor = PowderedPink,
                 periodSelectorSelectedContainerColor = SoftBlueLavander
-            )
+            ),
+            modifier = Modifier.focusRequester(focusRequester)
         )
+        LaunchedEffect(Unit) {
+            focusManager.clearFocus(force = true)
+        }
     }
 
 }

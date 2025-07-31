@@ -62,8 +62,16 @@ fun HomeScreen(navController: NavController) {
                     navController.navigate(Screen.MoodSelectionScreen.route)
                 }
             }
-            item { FeatureItemComponent(Icons.Outlined.Medication, "Medicación", green) {} }
-            item { FeatureItemComponent(Icons.Outlined.Nightlight, "Sueño", purple) {} }
+            item {
+                FeatureItemComponent(Icons.Outlined.Medication, "Medicación", green) {
+                    navController.navigate(Screen.MedicationTrackerScreen.route)
+                }
+            }
+            item {
+                FeatureItemComponent(Icons.Outlined.Nightlight, "Sueño", purple) {
+                    navController.navigate(Screen.SleepTrackerScreen.route)
+                }
+            }
             item { FeatureItemComponent(Icons.Outlined.AssignmentInd, "Terapia", pink) {} }
         }
     }

@@ -9,9 +9,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.meyrforge.polarsync.feature_home.presentation.HomeScreen
 import com.meyrforge.polarsync.feature_login.presentation.LoginScreen
+import com.meyrforge.polarsync.feature_medication.presentation.MedicationScreen
 import com.meyrforge.polarsync.feature_moods.presentation.MoodSelectionScreen
 import com.meyrforge.polarsync.feature_register.presentation.ActivationEmailScreen
 import com.meyrforge.polarsync.feature_register.presentation.RegisterScreen
+import com.meyrforge.polarsync.feature_sleep.presentation.SleepTrackerScreen
 import com.meyrforge.polarsync.ui.theme.PolarSyncTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,6 +43,12 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(route = Screen.MoodSelectionScreen.route) {
                         MoodSelectionScreen()
+                    }
+                    composable(route = Screen.SleepTrackerScreen.route){
+                        SleepTrackerScreen()
+                    }
+                    composable(route = Screen.MedicationTrackerScreen.route){
+                        MedicationScreen()
                     }
                 }
             }

@@ -48,7 +48,8 @@ fun TopSemicircleItem(title: String) {
             color = DeepPurple,
             fontSize = 30.sp,
             fontWeight = FontWeight.Medium,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            lineHeight = 35.sp
         )
     }
 }

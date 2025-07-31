@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Divider
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -21,25 +19,31 @@ import androidx.compose.ui.unit.sp
 import com.meyrforge.polarsync.ui.theme.DeepPurple
 import com.meyrforge.polarsync.ui.theme.PowderedPink
 import com.meyrforge.polarsync.ui.theme.SoftBlueLavander
+import kotlin.math.roundToInt
 
 @Preview
 @Composable
-fun HoursSliderPreview(){
+fun HoursSliderPreview() {
     HoursSliderComponent(10f) { }
 }
 
 
-
 @Composable
 fun HoursSliderComponent(sliderPosition: Float, onSliderChange: (Float) -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().height(116.dp),
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(116.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp), contentAlignment = Alignment.CenterStart) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp), contentAlignment = Alignment.CenterStart
+        ) {
             Text("Horas de sueño", fontSize = 18.sp, color = PowderedPink)
         }
-//        HorizontalDivider(thickness = 2.dp, color = PowderedPink, modifier = Modifier.padding(vertical = 8.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,7 +56,11 @@ fun HoursSliderComponent(sliderPosition: Float, onSliderChange: (Float) -> Unit)
             Text("24", fontSize = 24.sp, color = PowderedPink)
         }
         Slider(
-            sliderPosition, {}, steps = 24, valueRange = 0f..24f, colors = SliderDefaults.colors(
+            sliderPosition,
+            { onSliderChange(it.roundToInt().toFloat()) },
+            steps = 24,
+            valueRange = 0f..24f,
+            colors = SliderDefaults.colors(
                 thumbColor = SoftBlueLavander,
                 activeTrackColor = PowderedPink,
                 activeTickColor = DeepPurple,

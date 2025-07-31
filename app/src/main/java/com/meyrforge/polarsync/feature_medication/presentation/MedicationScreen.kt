@@ -1,4 +1,4 @@
-package com.meyrforge.polarsync.feature_medication.presentation.components
+package com.meyrforge.polarsync.feature_medication.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.meyrforge.polarsync.feature_medication.presentation.components.MedicationEditCheckboxComponent
 import com.meyrforge.polarsync.ui.shared.ButtonComponent
 import com.meyrforge.polarsync.ui.shared.DateComponent
 import com.meyrforge.polarsync.ui.shared.PolyTalkItem
@@ -24,27 +25,27 @@ import com.meyrforge.polarsync.ui.theme.PowderedPink
 @Composable
 fun MedicationScreen() {
     LazyColumn(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .fillMaxSize()
             .background(DeepPurple)
     ) {
-        item { TopSemicircleItem("Seguimiento de medicacion") }
+        item { TopSemicircleItem("Seguimiento de medicación") }
         item { PolyTalkItem() }
         item { DateComponent() }
-        item { MedicationEditCheckboxComponent("Medicacion 120", true) }
-        item { MedicationEditCheckboxComponent("Medicacion 2", false) }
+        item { MedicationEditCheckboxComponent("Medicación 120") {} }
+        item { MedicationEditCheckboxComponent("Medicación 2") {} }
         item {
-            Box(modifier = Modifier.padding(horizontal = 20.dp, vertical = 6.dp)) {
-                ButtonComponent("Agregar medicacion") { }
+            Box(modifier = Modifier.Companion.padding(horizontal = 20.dp, vertical = 6.dp)) {
+                ButtonComponent("Agregar medicación") { }
             }
         }
         item {
-            Box(modifier = Modifier.fillMaxSize()) {
+            Box(modifier = Modifier.Companion.fillMaxSize()) {
                 Button(
                     onClick = {},
-                    modifier = Modifier
+                    modifier = Modifier.Companion
                         .padding(horizontal = 20.dp, vertical = 20.dp)
-                        .align(Alignment.BottomEnd),
+                        .align(Alignment.Companion.BottomEnd),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = PowderedPink,
                         contentColor = DeepPurple

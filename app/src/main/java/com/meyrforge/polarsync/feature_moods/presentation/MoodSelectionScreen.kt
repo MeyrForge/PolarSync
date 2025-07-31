@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.meyrforge.polarsync.feature_moods.presentation.components.MoodSelectionComponent
 import com.meyrforge.polarsync.ui.shared.ButtonComponent
+import com.meyrforge.polarsync.ui.shared.PolyTalkItem
 import com.meyrforge.polarsync.ui.shared.TopSemicircleItem
 import com.meyrforge.polarsync.ui.theme.DeepPurple
 import com.meyrforge.polarsync.ui.theme.orange
@@ -54,7 +55,10 @@ fun MoodSelectionScreen(viewModel: MoodSelectionViewModel = hiltViewModel()) {
                 Spacer(modifier = Modifier.height(10.dp))
             }
             item {
-                Column(modifier = Modifier.padding(20.dp)) {
+                PolyTalkItem()
+            }
+            item {
+                Column(modifier = Modifier.padding(10.dp)) {
                     MoodSelectionComponent(
                         highestMood,
                         pink,
@@ -93,7 +97,7 @@ fun MoodSelectionScreen(viewModel: MoodSelectionViewModel = hiltViewModel()) {
 
 
 @Composable
-fun NotificationSnackbar(viewModel: MoodSelectionViewModel, snackbarHostState: SnackbarHostState){
+fun NotificationSnackbar(viewModel: MoodSelectionViewModel, snackbarHostState: SnackbarHostState) {
     val notificationMessage by viewModel.notificationMessage.observeAsState()
 
     LaunchedEffect(notificationMessage) {
