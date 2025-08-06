@@ -1,4 +1,4 @@
-package com.meyrforge.polarsync.feature_sleep.presentation.utils
+package com.meyrforge.polarsync.common.utils
 
 fun getDayOfWeek(day: Int) : String{
     return when(day){

@@ -8,10 +8,6 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,12 +19,13 @@ import com.meyrforge.polarsync.ui.theme.SoftBlueLavander
 
 @Composable
 fun SegmentedButtonComponent(
-    modifier: Modifier
+    modifier: Modifier,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
 ) {
-    var checked by remember { mutableStateOf(false) }
     Switch(
         checked = checked,
-        onCheckedChange = { checked = !checked },
+        onCheckedChange = { onCheckedChange(!checked) },
         enabled = true,
         thumbContent = if (checked) {
             {
@@ -61,7 +58,7 @@ fun SegmentedButtonComponent(
 }
 
 @Composable
-fun QuestionWithSegmentedButtonComponent(text:String) {
+fun QuestionWithSegmentedButtonComponent(text:String, checked: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -70,6 +67,6 @@ fun QuestionWithSegmentedButtonComponent(text:String) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text, fontSize = 16.sp, color = PowderedPink, modifier = Modifier.weight(8f))
-        SegmentedButtonComponent(modifier = Modifier.weight(2f))
+        SegmentedButtonComponent(modifier = Modifier.weight(2f), checked, onCheckedChange)
     }
 }

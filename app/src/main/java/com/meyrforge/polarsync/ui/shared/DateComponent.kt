@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.meyrforge.polarsync.feature_sleep.presentation.utils.getDayOfWeek
-import com.meyrforge.polarsync.feature_sleep.presentation.utils.getMonth
+import com.meyrforge.polarsync.common.utils.getDayOfWeek
+import com.meyrforge.polarsync.common.utils.getMonth
 import com.meyrforge.polarsync.ui.theme.PowderedPink
 import java.util.Calendar
 

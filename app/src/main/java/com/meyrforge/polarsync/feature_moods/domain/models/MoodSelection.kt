@@ -1,7 +1,5 @@
 package com.meyrforge.polarsync.feature_moods.domain.models
 
-import java.sql.Date
-
 data class MoodSelection(
     val highest: String = "",
     val irritable: String = "",
