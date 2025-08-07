@@ -11,6 +11,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.TimePickerDefaults
+import androidx.compose.material3.TimePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,7 +45,9 @@ fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()
     val focusManager = LocalFocusManager.current
 
     val timeSelected: String by viewModel.timeSelected.observeAsState("")
-    val timeState = rememberTimePickerState(is24Hour = false)
+    val timeState = rememberTimePickerState(0,0,false)
+    var timeSelectedToState = formatStringToTimeState(timeSelected)
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,7 +63,7 @@ fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()
             textAlign = TextAlign.Start
         )
         TimeInput(
-            state = timeState,
+            state = if (timeSelectedToState.hour == 0 && timeSelectedToState.minute == 0) timeState else timeSelectedToState,
             colors = TimePickerDefaults.colors(
                 timeSelectorSelectedContentColor = DeepPurple,
                 timeSelectorSelectedContainerColor = PowderedPink,
@@ -73,7 +76,12 @@ fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()
         }
         LaunchedEffect(timeState.hour, timeState.minute) {
             viewModel.onTimeSelectedChange(formattedTime(timeState.hour, timeState.minute))
-            Log.i("hora", timeSelected)
+        }
+        LaunchedEffect(timeSelectedToState.hour, timeSelectedToState.minute) {
+            viewModel.onTimeSelectedChange(formattedTime(timeSelectedToState.hour, timeSelectedToState.minute))
+        }
+        LaunchedEffect(timeSelected) {
+            timeSelectedToState = formatStringToTimeState(timeSelected)
         }
     }
 
@@ -84,4 +92,12 @@ fun formattedTime(hour: Int, minute: Int): String {
     val formatter = DateTimeFormatter.ofPattern("HH:mm")
     val time = LocalTime.of(hour, minute).format(formatter)
     return time
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@RequiresApi(Build.VERSION_CODES.O)
+fun formatStringToTimeState(time: String): TimePickerState {
+    val formatter = DateTimeFormatter.ofPattern("HH:mm")
+    val localTime = LocalTime.parse(time, formatter)
+    return TimePickerState(localTime.hour, localTime.minute, is24Hour = false)
 }

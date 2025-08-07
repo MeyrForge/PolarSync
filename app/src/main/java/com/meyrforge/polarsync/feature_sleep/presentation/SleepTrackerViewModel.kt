@@ -19,7 +19,7 @@ class SleepTrackerViewModel @Inject constructor(
     private val _sliderPosition = MutableLiveData(0f)
     var sliderPosition = _sliderPosition
 
-    private val _timeSelected = MutableLiveData("")
+    private val _timeSelected = MutableLiveData("00:00")
     var timeSelected = _timeSelected
 
     private val _negativeThoughts = MutableLiveData(false)
