@@ -12,7 +12,7 @@ interface MoodDao {
     suspend fun insertMood(mood: MoodEntity) : Long?
 
     @Query("SELECT * FROM mood_table WHERE date = :date")
-    suspend fun searchByDate(date: String) : List<MoodEntity>?
+    suspend fun searchByDate(date: String) : List<MoodEntity>
 
     @Query("SELECT * FROM mood_table")
     suspend fun getAllMoods() : List<MoodEntity?>

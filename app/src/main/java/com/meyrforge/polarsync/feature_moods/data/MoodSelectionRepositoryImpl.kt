@@ -13,12 +13,8 @@ class MoodSelectionRepositoryImpl @Inject constructor(private val moodDao: MoodD
     }
 
     override suspend fun getMoodsByDate(date: String): MoodSelection {
-        val moods = moodDao.searchByDate(date)
-        return if(moods.isNullOrEmpty()){
-            MoodSelection()
-        }else{
-            moods.last().toMoodSelection()
-        }
+        val moods = moodDao.searchByDate(date).lastOrNull()
+        return moods?.toMoodSelection() ?: MoodSelection()
     }
 
 }

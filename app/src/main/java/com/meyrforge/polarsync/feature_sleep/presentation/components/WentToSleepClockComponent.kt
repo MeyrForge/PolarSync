@@ -16,12 +16,17 @@ import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,12 +46,20 @@ import java.time.format.DateTimeFormatter
 @Preview
 @Composable
 fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()) {
-    val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
     val timeSelected: String by viewModel.timeSelected.observeAsState("")
-    val timeState = rememberTimePickerState(0,0,false)
-    var timeSelectedToState = formatStringToTimeState(timeSelected)
+    var timePickerState by remember {
+        mutableStateOf(formatStringToTimeState(timeSelected))
+    }
+
+    LaunchedEffect(timeSelected) {
+        //timePickerState = formatStringToTimeState(timeSelected)
+        val newTimePickerState = formatStringToTimeState(timeSelected)
+        if (newTimePickerState.hour != timePickerState.hour || newTimePickerState.minute != timePickerState.minute) {
+            timePickerState = newTimePickerState
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -54,7 +67,7 @@ fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            "A qué hora te fuiste a dormir?",
+            "¿A qué hora te fuiste a dormir?",
             fontSize = 18.sp,
             color = PowderedPink,
             modifier = Modifier
@@ -62,26 +75,26 @@ fun WentToSleepClockComponent(viewModel: SleepTrackerViewModel = hiltViewModel()
                 .padding(horizontal = 20.dp, vertical = 16.dp),
             textAlign = TextAlign.Start
         )
+
         TimeInput(
-            state = if (timeSelectedToState.hour == 0 && timeSelectedToState.minute == 0) timeState else timeSelectedToState,
+            state = timePickerState,
             colors = TimePickerDefaults.colors(
                 timeSelectorSelectedContentColor = DeepPurple,
                 timeSelectorSelectedContainerColor = PowderedPink,
                 periodSelectorSelectedContainerColor = SoftBlueLavander
-            ),
-            modifier = Modifier.focusRequester(focusRequester)
+            )
         )
+
         LaunchedEffect(Unit) {
             focusManager.clearFocus(force = true)
         }
-        LaunchedEffect(timeState.hour, timeState.minute) {
-            viewModel.onTimeSelectedChange(formattedTime(timeState.hour, timeState.minute))
-        }
-        LaunchedEffect(timeSelectedToState.hour, timeSelectedToState.minute) {
-            viewModel.onTimeSelectedChange(formattedTime(timeSelectedToState.hour, timeSelectedToState.minute))
-        }
-        LaunchedEffect(timeSelected) {
-            timeSelectedToState = formatStringToTimeState(timeSelected)
+        LaunchedEffect(timePickerState.hour, timePickerState.minute) {
+            viewModel.onTimeSelectedChange(
+                formattedTime(
+                    timePickerState.hour,
+                    timePickerState.minute
+                )
+            )
         }
     }
 
