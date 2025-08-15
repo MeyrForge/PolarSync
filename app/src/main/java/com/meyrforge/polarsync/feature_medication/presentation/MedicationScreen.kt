@@ -9,11 +9,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meyrforge.polarsync.feature_medication.presentation.components.MedicationEditCheckboxComponent
+import com.meyrforge.polarsync.feature_medication.presentation.components.NewMedicationDialogComponent
 import com.meyrforge.polarsync.ui.shared.ButtonComponent
 import com.meyrforge.polarsync.ui.shared.DateComponent
 import com.meyrforge.polarsync.ui.shared.PolyTalkItem
@@ -24,6 +29,7 @@ import com.meyrforge.polarsync.ui.theme.PowderedPink
 @Preview
 @Composable
 fun MedicationScreen() {
+    var openAlertDialog by remember { mutableStateOf(false) }
     LazyColumn(
         modifier = Modifier.Companion
             .fillMaxSize()
@@ -36,7 +42,7 @@ fun MedicationScreen() {
         item { MedicationEditCheckboxComponent("Medicación 2") {} }
         item {
             Box(modifier = Modifier.Companion.padding(horizontal = 20.dp, vertical = 6.dp)) {
-                ButtonComponent("Agregar medicación") { }
+                ButtonComponent("Agregar medicación") { openAlertDialog = true }
             }
         }
         item {
@@ -53,5 +59,8 @@ fun MedicationScreen() {
                 ) { Text("Guardar") }
             }
         }
+    }
+    if (openAlertDialog){
+        NewMedicationDialogComponent { openAlertDialog = false }
     }
 }
